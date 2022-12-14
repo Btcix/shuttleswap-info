@@ -47,8 +47,8 @@ export default function GlobalStats() {
               }}
               style={{ position: 'relative' }}
             >
-              ETH Price: <Medium>{formattedEthPrice}</Medium>
-              {showPriceCard && <UniPrice />}
+              BTCIX Price: <Medium>{formattedEthPrice}</Medium>
+              {false && showPriceCard && <UniPrice />}
             </TYPE.main>
           )}
 

@@ -3,7 +3,7 @@ import { FACTORY_ADDRESS, BUNDLE_ID } from '../constants'
 
 export const SUBGRAPH_HEALTH = gql`
   query health {
-    indexingStatusForCurrentVersion(subgraphName: "uniswap/uniswap-v2") {
+    indexingStatusForCurrentVersion(subgraphName: "btcix/shuttleswap") {
       synced
       health
       chains {
@@ -333,9 +333,11 @@ export const USER_TRANSACTIONS = gql`
         id
         token0 {
           symbol
+          id
         }
         token1 {
           symbol
+          id
         }
       }
       sender
@@ -354,9 +356,11 @@ export const USER_TRANSACTIONS = gql`
       pair {
         token0 {
           symbol
+          id
         }
         token1 {
           symbol
+          id
         }
       }
       amount0In

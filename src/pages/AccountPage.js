@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
-import { useUserTransactions, useUserPositions, useMiningPositions } from '../contexts/User'
+import { useUserTransactions, useUserPositions } from '../contexts/User'
 import TxnList from '../components/TxnList'
 import Panel from '../components/Panel'
 import { formattedNum } from '../utils'
@@ -9,9 +9,9 @@ import { AutoColumn } from '../components/Column'
 import UserChart from '../components/UserChart'
 import PairReturnsChart from '../components/PairReturnsChart'
 import PositionList from '../components/PositionList'
-import MiningPositionList from '../components/MiningPositionList'
+// import MiningPositionList from '../components/MiningPositionList'
 import { TYPE } from '../Theme'
-import { ButtonDropdown, ButtonLight } from '../components/ButtonStyled'
+import { ButtonDropdown } from '../components/ButtonStyled'
 import { PageWrapper, ContentWrapper, StyledIcon } from '../components'
 import DoubleTokenLogo from '../components/DoubleLogo'
 import { Bookmark, Activity } from 'react-feather'
@@ -21,6 +21,7 @@ import { BasicLink } from '../components/Link'
 import { useMedia } from 'react-use'
 import Search from '../components/Search'
 import { useSavedAccounts } from '../contexts/LocalStorage'
+import { updateNameData } from '../utils/data'
 
 const AccountWrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
@@ -92,7 +93,7 @@ function AccountPage({ account }) {
   // get data for this account
   const transactions = useUserTransactions(account)
   const positions = useUserPositions(account)
-  const miningPositions = useMiningPositions(account)
+  // const miningPositions = useMiningPositions(account)
 
   // get data for user stats
   const transactionCount = transactions?.swaps?.length + transactions?.burns?.length + transactions?.mints?.length
@@ -117,6 +118,9 @@ function AccountPage({ account }) {
         ) {
           setShowWarning(true)
         }
+
+        positions[i].token0Symbol = updateNameData(positions[i].pair)?.token0?.symbol
+        positions[i].token1Symbol = updateNameData(positions[i].pair)?.token1?.symbol
       }
     }
   }, [positions])
@@ -166,7 +170,7 @@ function AccountPage({ account }) {
         <RowBetween>
           <TYPE.body>
             <BasicLink to="/accounts">{'Accounts '}</BasicLink>→{' '}
-            <Link lineHeight={'145.23%'} href={'https://etherscan.io/address/' + account} target="_blank">
+            <Link lineHeight={'145.23%'} href={'https://btcixscan.com/address/' + account} target="_blank">
               {' '}
               {account?.slice(0, 42)}{' '}
             </Link>
@@ -177,8 +181,8 @@ function AccountPage({ account }) {
           <RowBetween>
             <span>
               <TYPE.header fontSize={24}>{account?.slice(0, 6) + '...' + account?.slice(38, 42)}</TYPE.header>
-              <Link lineHeight={'145.23%'} href={'https://etherscan.io/address/' + account} target="_blank">
-                <TYPE.main fontSize={14}>View on Etherscan</TYPE.main>
+              <Link lineHeight={'145.23%'} href={'https://btcixscan.com/address/' + account} target="_blank">
+                <TYPE.main fontSize={14}>View on BTCIXscan</TYPE.main>
               </Link>
             </span>
             <AccountWrapper>
@@ -217,11 +221,11 @@ function AccountPage({ account }) {
                 <Flyout>
                   <AutoColumn gap="0px">
                     {positions?.map((p, i) => {
-                      if (p.pair.token1.symbol === 'WETH') {
-                        p.pair.token1.symbol = 'ETH'
+                      if (p.pair.token1.symbol === 'WBTCIX') {
+                        p.pair.token1.symbol = 'BTCIX'
                       }
-                      if (p.pair.token0.symbol === 'WETH') {
-                        p.pair.token0.symbol = 'ETH'
+                      if (p.pair.token0.symbol === 'WBTCIX') {
+                        p.pair.token0.symbol = 'BTCIX'
                       }
                       return (
                         p.pair.id !== activePosition?.pair.id && (
@@ -313,7 +317,7 @@ function AccountPage({ account }) {
           >
             <PositionList positions={positions} />
           </Panel>
-          <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
+          {/* <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
             Liquidity Mining Pools
           </TYPE.main>
           <Panel
@@ -330,7 +334,7 @@ function AccountPage({ account }) {
                 </AutoRow>{' '}
               </AutoColumn>
             )}
-          </Panel>
+          </Panel> */}
           <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
             Transactions
           </TYPE.main>{' '}

@@ -333,9 +333,11 @@ export const USER_TRANSACTIONS = gql`
         id
         token0 {
           symbol
+          id
         }
         token1 {
           symbol
+          id
         }
       }
       sender
@@ -354,9 +356,11 @@ export const USER_TRANSACTIONS = gql`
       pair {
         token0 {
           symbol
+          id
         }
         token1 {
           symbol
+          id
         }
       }
       amount0In

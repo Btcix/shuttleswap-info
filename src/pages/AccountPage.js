@@ -92,7 +92,7 @@ function AccountPage({ account }) {
   // get data for this account
   const transactions = useUserTransactions(account)
   const positions = useUserPositions(account)
-  const miningPositions = useMiningPositions(account)
+  // const miningPositions = useMiningPositions(account)
 
   // get data for user stats
   const transactionCount = transactions?.swaps?.length + transactions?.burns?.length + transactions?.mints?.length
@@ -313,7 +313,7 @@ function AccountPage({ account }) {
           >
             <PositionList positions={positions} />
           </Panel>
-          <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
+          {/* <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
             Liquidity Mining Pools
           </TYPE.main>
           <Panel
@@ -330,7 +330,7 @@ function AccountPage({ account }) {
                 </AutoRow>{' '}
               </AutoColumn>
             )}
-          </Panel>
+          </Panel> */}
           <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
             Transactions
           </TYPE.main>{' '}

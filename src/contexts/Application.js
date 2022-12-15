@@ -277,6 +277,8 @@ export function useListedTokens() {
         }
       }, Promise.resolve([]))
       let formatted = allFetched?.map((t) => t.address.toLowerCase())
+      // add WBTCIX to listed tokens
+      if (formatted) formatted.push('0x1763d5e86452ed9c13b874fde60a0669d11c5d40')
       updateSupportedTokens(formatted)
     }
     if (!supportedTokens) {
